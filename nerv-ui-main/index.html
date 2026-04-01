@@ -944,30 +944,26 @@ body { animation: phosphor-flicker 4s ease-in-out infinite; }
     <div class="dash-row r2">
 
       <div class="panel">
-        <div class="panel-header"><span>Unit-00 — alETH</span><span class="tag"><span class="led green"></span>Operational</span></div>
+        <div class="panel-header"><span>Unit-00 — Hardware</span><span class="tag"><span class="led green"></span>Operational</span></div>
         <div class="vault-card">
-          <div class="vc-id">Primary — Ethereum</div>
-          <div class="vc-name">自己返済型ＥＴＨ</div>
-          <div class="vc-row"><span class="lbl">TVL</span><span class="val" id="vETH_tvl">$142,800,000</span></div>
-          <div class="vc-row"><span class="lbl">Composite APY</span><span class="val" id="vETH_apy">4.82%</span></div>
-          <div class="vc-row"><span class="lbl">Positions</span><span class="val" id="vETH_pos">2,847</span></div>
-          <div class="vc-row"><span class="lbl">Debt Outstanding</span><span class="val" id="vETH_debt">24,180 alETH</span></div>
-          <div class="vc-row"><span class="lbl">Collateral Ratio</span><span class="val" id="vETH_cr">2.41x</span></div>
-          <div class="vc-row"><span class="lbl">Strategies</span><span class="val">Morpho · EtherFi · Aave</span></div>
+          <div class="vc-id">Primary — Robotics</div>
+          <div class="vc-name">四軸書写ロボット</div>
+          <div class="vc-row"><span class="lbl">Architecture</span><span class="val">CoreXY</span></div>
+          <div class="vc-row"><span class="lbl">Controller</span><span class="val">PCA9685 + Servos</span></div>
+          <div class="vc-row"><span class="lbl">Software Stack</span><span class="val">Python / GRBL / G-code</span></div>
+          <div class="vc-row"><span class="lbl">Status</span><span class="val">Team of 4</span></div>
         </div>
       </div>
 
       <div class="panel">
-        <div class="panel-header"><span>Unit-01 — alUSD</span><span class="tag"><span class="led green"></span>Operational</span></div>
+        <div class="panel-header"><span>Unit-01 — Research</span><span class="tag"><span class="led green"></span>Published</span></div>
         <div class="vault-card">
-          <div class="vc-id">Stablecoin — USDC</div>
-          <div class="vc-name">自己返済型ＵＳＤ</div>
-          <div class="vc-row"><span class="lbl">TVL</span><span class="val" id="vUSD_tvl">$89,200,000</span></div>
-          <div class="vc-row"><span class="lbl">Composite APY</span><span class="val" id="vUSD_apy">6.14%</span></div>
-          <div class="vc-row"><span class="lbl">Positions</span><span class="val" id="vUSD_pos">1,623</span></div>
-          <div class="vc-row"><span class="lbl">Debt Outstanding</span><span class="val" id="vUSD_debt">18,420,000 alUSD</span></div>
-          <div class="vc-row"><span class="lbl">Collateral Ratio</span><span class="val" id="vUSD_cr">2.12x</span></div>
-          <div class="vc-row"><span class="lbl">Strategies</span><span class="val">Euler · Fluid · Aave</span></div>
+          <div class="vc-id">Algorithm — Deep Learning</div>
+          <div class="vc-name">医療画像機械学習</div>
+          <div class="vc-row"><span class="lbl">Focus</span><span class="val">Brain Imaging / Brain-inspired AI</span></div>
+          <div class="vc-row"><span class="lbl">Publication</span><span class="val">IEEE JSTSP (SCI Q1)</span></div>
+          <div class="vc-row"><span class="lbl">Models</span><span class="val">Diffusion / DiT / LLMs</span></div>
+          <div class="vc-row"><span class="lbl">Advisors</span><span class="val">Prof. Zhang Fan / Jiang Xi</span></div>
         </div>
       </div>
 
@@ -1271,9 +1267,9 @@ function fmtNum(n) {
   if (!logBody) return;
 
   const EVENT_TYPES = [
-    { type: 'DEPOSIT', cls: 'deposit', weight: 30 },
+    { type: 'Commit', cls: 'deposit', weight: 30 },
     { type: 'BORROW', cls: 'borrow', weight: 20 },
-    { type: 'HARVEST', cls: 'harvest', weight: 25 },
+    { type: 'Train', cls: 'harvest', weight: 25 },
     { type: 'REPAY', cls: 'repay', weight: 10 },
     { type: 'REDEEM', cls: 'redeem', weight: 10 },
     { type: 'MINT', cls: 'mint', weight: 5 },
@@ -1304,7 +1300,7 @@ function fmtNum(n) {
     let detail = '', amount = '';
 
     switch (et.type) {
-      case 'DEPOSIT': {
+      case 'Commit': {
         const amts = { alETH: [0.5, 200, 'ETH'], alUSD: [500, 100000, 'USDC'] };
         const [lo, hi, unit] = amts[vault];
         const qty = lo + Math.random() * (hi - lo);
@@ -1322,14 +1318,13 @@ function fmtNum(n) {
         amount = fmtNum(qty) + ' ' + unit;
         break;
       }
-      case 'HARVEST': {
-        const strats = PROTO.strategies.filter(s => s.vault === vault);
-        const strat = strats[Math.floor(Math.random() * strats.length)];
-        const amts = { alETH: [0.01, 2, 'ETH'], alUSD: [50, 5000, 'USDC'] };
-        const [lo, hi, unit] = amts[vault];
-        const qty = lo + Math.random() * (hi - lo);
-        detail = strat.name + ' yield';
-        amount = '+' + fmtNum(qty) + ' ' + unit;
+      case 'Train': {
+        const models = ['DiT Model', 'Diffusion Network', 'VLA Agent', 'Brain Imaging ResNet'];
+        const model = models[Math.floor(Math.random() * models.length)];
+        const epoch = Math.floor(Math.random() * 100) + 1;
+        const loss = (Math.random() * 0.05 + 0.001).toFixed(4);
+        detail = `Training ${model} - Epoch ${epoch}/100`;
+        amount = `Loss: ${loss}`;
         PROTO.harvests24h++;
         const usdVal = vault === 'alETH' ? qty * PROTO.ethPrice : qty;
         PROTO.yieldGenerated24h += usdVal;
